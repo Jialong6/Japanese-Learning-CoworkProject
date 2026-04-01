@@ -147,15 +147,14 @@
 4. **批量操作：** 如果一个命令流程中连续改了多个文件（如批改时更新错题本+错题精讲+错误模式库），可以合并为一次 commit，message 中列出所有改动
 5. **不 commit 的情况：** 临时文件、.DS_Store、用户还没做完题的练习卷
 
-### 会话结束 push（每次会话结束时）
+### 每次任务完成后 push
 
-当会话即将结束时（Jay 说再见/结束/下次见，或明确表示这轮结束了），执行：
+每次 Jay 发消息、Claude 完成对应任务后，在回复用户之前执行：
 
-1. 检查是否有未 push 的 commits（`git log origin/main..HEAD`）
-2. 如果有，执行 `git push origin main`
-3. push 前不需要额外 commit，之前的自动 commit 已经覆盖了所有改动
-4. 如果 push 失败（认证问题等），告诉 Jay 具体错误，让 Jay 协助解决
-5. push 成功后，告诉 Jay 本次会话一共推送了几个 commit
+1. 确保所有改动已 commit（上一步的自动 commit 应该已覆盖）
+2. 执行 `git push origin main`
+3. 如果 push 失败（认证问题等），告诉 Jay 具体错误，让 Jay 协助解决
+4. push 成功后简要告知
 
 > **注意：** git config 已配置好（user.name: Jialong6, user.email: jialon66@gmail.com）。push 时如果遇到认证问题，需要 Jay 提供 token。
 
